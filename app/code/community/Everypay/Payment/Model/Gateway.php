@@ -70,26 +70,27 @@ class Everypay_Payment_Model_Gateway
 
         $postString = empty($data) ? null : http_build_query($data);
 
-        $responseString = $this->send($url, $postString);
+        $response = $this->send($url, $data);
+
+        $responseString = $response->getBody();
 
         return new Everypay_Payment_Model_GatewayResponse(json_decode($responseString));
     }
 
     private function send($url, $data)
     {
-        $ch = curl_init();
+        $client = new Varien_Http_Client();
+        $client->setUri($url);
+        $client->setConfig(array(
+            'maxredirects' => 0,
+            'timeout' => 60,
+            'useragent' => 'Everypay Magento Plugin/0.1.0 (+https://www.everypay.gr)'
+        ));
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERPWD, $this->secretKey . ":");
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        $client->setParameterPost($data);
+        $client->setMethod(Zend_Http_Client::POST);
+        $client->setAuth($this->secretKey);
 
-        $response = curl_exec($ch);
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        return $response;
+        return $client->request();
     }
 }
