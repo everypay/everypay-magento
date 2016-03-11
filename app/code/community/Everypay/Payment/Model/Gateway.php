@@ -9,6 +9,9 @@ class Everypay_Payment_Model_Gateway
 
     const PURCHASE = '/payments';
     const AUTHORIZE = '/payments';
+    const CAPTURE = '/payments/capture/%s';
+    const REFUND = '/payments/refund/%s';
+    const VOID = '/payments/refund/%s';
 
     private $secretKey;
 
@@ -23,32 +26,49 @@ class Everypay_Payment_Model_Gateway
         $this->isTest = (bool) $sandbox;
     }
 
-    public function purchase($token, array $data)
+    public function purchase(array $data)
     {
-        return $this->charge(self::PURCHASE, $token, $data);
+        return $this->charge(self::PURCHASE, $data);
     }
 
-    public function authorize($token, array $data)
+    public function authorize(array $data)
     {
-        $data['capture'] = 0;
-
-        return $this->charge(self::AUTHORIZE, $token, $data);
+        return $this->charge(self::AUTHORIZE, $data);
     }
 
-    private function charge($action, $token, array $data)
+    public function capture($token)
     {
-        $data['token'] = $token;
+        $action = sprintf(self::CAPTURE, $token);
 
+        return $this->commit($action);
+    }
+
+    public function refund($token, $amount)
+    {
+        $action = sprintf(self::REFUND, $token);
+
+        return $this->commit($action, ['amount' => $amount]);
+    }
+
+    public function void($token)
+    {
+        $action = sprintf(self::REFUND, $token);
+
+        return $this->commit($action);
+    }
+
+    private function charge($action, array $data)
+    {
         return $this->commit($action, $data);
     }
 
-    private function commit($action, $data)
+    private function commit($action, array $data = array())
     {
         $url = $this->isTest ? self::TEST_URL : self::LIVE_URL;
 
         $url .= $action;
 
-        $postString = http_build_query($data);
+        $postString = empty($data) ? null : http_build_query($data);
 
         $responseString = $this->send($url, $postString);
 
