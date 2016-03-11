@@ -46,5 +46,18 @@ class Everypay_Payment_Block_Button extends Mage_Core_Block_Template
         $fields['store_name'] = str_replace(array("\r", "\n"), "", $order->getData('store_name'));
 
         $this->_params = $fields;
+
+        $maxInstallments = 0;
+        if (false !== $max = $this->getMaxInstallments($amount)) {
+            $maxInstallments = $max;
+        }
+        $this->_params['max_installments'] = $maxInstallments;
+    }
+
+    private function getMaxInstallments($total)
+    {
+        $installments = new Everypay_Payment_Model_Installments();
+
+        return $installments->getMaxInstallments($total);
     }
 }

@@ -4,9 +4,10 @@
 var options = {
     'key': "<?= $params['public_key'] ?>",
     'amount': "<?= $params['amount'] ?>",
-    'description': 'Order# ' + "<?= $params['store_name']?>",
+    'description': 'Order for ' + "<?= $params['store_name']?>",
     'currency': "<?= $params['currency_code']?>",
     'sandbox': "<?= $params['sandbox'] ?>",
+    'max_installments': "<?= $params['max_installments']?>"
 };
 EverypayMage.setOptions(options);
 EverypayMage.renderAndShow();
