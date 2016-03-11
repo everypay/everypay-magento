@@ -56,6 +56,13 @@
     </adminhtml>
 
     <frontend>
+        <layout>
+            <updates>
+                <everypay>
+                    <file>everypay.xml</file>
+                </everypay>
+            </updates>
+        </layout>
         <events>
             <controller_action_postdispatch_checkout_onepage_savePayment>
                 <observers>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="core/text" name="everypay_head">
+                <action method="addText">
+                    <text>
+                        <![CDATA[
+                            <script type="text/javascript" src="https://button.everypay.gr/js/button.js"></script>
+                        ]]>
+                    </text>
+                </action>
+            </block>
+            <action method="addJs">
+                <script>everypay/everypay.js</script>
+            </action>
+
+        </reference>
+    </default>
+</layout>

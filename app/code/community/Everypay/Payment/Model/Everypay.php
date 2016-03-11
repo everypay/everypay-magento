@@ -137,6 +137,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
     private function purchase(Varien_Object $payment)
     {
         try {
+            $gateway = $this->getGateway();
             $response = $gateway->purchase($this->buildPurchaseRequest($payment));
         } catch (Exception $e) {
             $this->throwException();

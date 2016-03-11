@@ -1,19 +1,17 @@
+<?php $params = $this->_params; ?>
 <script type="text/javascript">
 //<![CDATA[
-    var head = $$("head")[0];
-    var buttonScript = new Element("script", { type: "text/javascript", src: "https://button.everypay.gr/js/button.js" });
-    var initButtonScript = new Element("script", { type: "text/javascript", src: "/js/everypay/everypayInitButton.js" })
-
-    head.appendChild(buttonScript);
-    head.appendChild(initButtonScript);
+var options = {
+    'key': "<?= $params['public_key'] ?>",
+    'amount': "<?= $params['amount'] ?>",
+    'description': 'Order# ' + "<?= $params['store_name']?>",
+    'currency': "<?= $params['currency_code']?>",
+    'sandbox': "<?= $params['sandbox'] ?>",
+};
+EverypayMage.setOptions(options);
+EverypayMage.renderAndShow();
 //]]>
 </script>
-<?php $params = $this->_params; ?>
-<form action="#" name-"everypay-form" id="everypay-form" method="post">
-    <input type="hidden" id="public-key" value="<?= $params['public_key'] ?>" />
-    <input type="hidden" id="amount" value="<?= $params['amount'] ?>" />
-    <input type="hidden" id="description" value="<?= $params['store_name']?>" />
-    <input type="hidden" id="currency" value="<?= $params['currency_code']?>" />
-    <input type="hidden" id="sandbox" value="<?= $params['sandbox'] ?>" />
+<form action="" name="everypay-form" id="everypay-form">
     <div class="button-holder" style="display: none"></div>
 </form>
