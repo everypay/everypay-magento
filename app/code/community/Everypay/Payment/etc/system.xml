@@ -3,7 +3,7 @@
     <sections>
         <payment>
             <groups>
-                <everypay translate="label comment" module="paygate">
+                <everypay translate="label comment" module="everypay">
                     <label>EveryPay</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>11</sort_order>
@@ -37,27 +37,27 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
-                        <public_key translate="label">
+                        <public_key translate="label, comment">
                             <label>Public key</label>
-                            <comment>**Required (Enter sandbox public key for testing) **</comment>
+                            <comment>public_key_comment</comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>4</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </public_key>
-                        <secret_key translate="label">
+                        <secret_key translate="label, comment">
                             <label>Secret Key</label>
-                            <comment>**Required (Enter sandbox secret key for testing)**</comment>
+                            <comment>secret_key_comment</comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </secret_key>
-                        <sandbox translate="label">
+                        <sandbox translate="label, comment">
                             <label>Sandbox Mode</label>
-                            <comment>** Set sandbox mode for testing **</comment>
+                            <comment>sandbox_mode_comment</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>6</sort_order>

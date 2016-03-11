@@ -1,3 +1,6 @@
 "--Please Select--","--Please Select--"
 "Authorize Only","Authorize Only"
 "Authorize and Capture","Authorize and Capture"
+"sandbox_mode_comment","** Set sandbox mode for testing **"
+"public_key_comment","** Required (Enter sandbox public key for testing) **"
+"secret_key_comment","** Required (Enter sandbox secret key for testing) **"
