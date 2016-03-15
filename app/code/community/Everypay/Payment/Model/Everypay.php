@@ -285,7 +285,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
     private function getGateway($payment)
     {
         $store = $payment->getOrder()->getStore(); //Mage::app()->getStore();
-        $sandbox = Mage::getStoreConfig('payment/everypay/sandbox'. $store);
+        $sandbox = Mage::getStoreConfig('payment/everypay/sandbox', $store);
         $secretKey = Mage::getStoreConfig('payment/everypay/secret_key', $store);
 
         return new Everypay_Payment_Model_Gateway($secretKey, $sandbox);
