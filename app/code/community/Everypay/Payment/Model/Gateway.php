@@ -47,7 +47,7 @@ class Everypay_Payment_Model_Gateway
     {
         $action = sprintf(self::REFUND, $token);
 
-        return $this->commit($action, ['amount' => $amount]);
+        return $this->commit($action, array('amount' => $amount));
     }
 
     public function void($token)
