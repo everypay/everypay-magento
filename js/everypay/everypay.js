@@ -3,6 +3,7 @@ var everypayTokenCallback = function(msg) {
     everypayToken.value = msg.token;
     everypayToken.removeAttribute('disabled');
     EverypayMage.showCheckoutButton();
+    review.save();
 };
 
 var EverypayMage = (function() {
