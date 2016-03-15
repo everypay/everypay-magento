@@ -53,7 +53,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         $payment->setIsTransactionClosed(false);
 
         try {
-            $gateway = $this->getGateway();
+            $gateway = $this->getGateway($payment);
             $response = $gateway->authorize($this->buildAuthorizeRequest($payment));
         } catch (Exception $e) {
             $this->throwException();
@@ -78,7 +78,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         $transId = str_replace('cpt_', null, $transId);
 
         try {
-            $gateway = $this->getGateway();
+            $gateway = $this->getGateway($payment);
             $response = $gateway->refund($transId, $this->getAmount($requestedAmount));
         } catch (Exception $e) {
             $this->throwException($e->getMessage());
@@ -101,7 +101,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         $transId = $payment->getLastTransId();
 
         try {
-            $gateway = $this->getGateway();
+            $gateway = $this->getGateway($payment);
             $response = $gateway->void($transId);
         } catch (Exception $e) {
             $this->throwException($e->getMessage());
@@ -123,7 +123,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
     private function captureOnline($transId, Varient_Object $payment)
     {
         try {
-            $gateway = $this->getGateway();
+            $gateway = $this->getGateway($payment);
             $response = $gateway->capture($transId);
         } catch (Exception $e) {
             $this->throwException();
@@ -137,7 +137,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
     private function purchase(Varien_Object $payment)
     {
         try {
-            $gateway = $this->getGateway();
+            $gateway = $this->getGateway($payment);
             $response = $gateway->purchase($this->buildPurchaseRequest($payment));
         } catch (Exception $e) {
             $this->throwException();
@@ -282,9 +282,9 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         return Mage::getSingleton('checkout/session');
     }
 
-    private function getGateway()
+    private function getGateway($payment)
     {
-        $store = Mage::app()->getStore();
+        $store = $payment->getOrder()->getStore(); //Mage::app()->getStore();
         $sandbox = Mage::getStoreConfig('payment/everypay/sandbox'. $store);
         $secretKey = Mage::getStoreConfig('payment/everypay/secret_key', $store);
 
