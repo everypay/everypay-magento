@@ -34,10 +34,11 @@ class Everypay_Payment_Block_Button extends Mage_Core_Block_Template
         $order = $this->getCheckout()->getQuote();
         $amount = round($order->getBaseGrandTotal(), 2);
         $currencyCode = $order->getBaseCurrencyCode();
+        $store = Mage::app()->getStore();
 
         $fields = array();
-        $fields['sandbox'] = Mage::getStoreConfig('payment/everypay/sandbox');
-        $fields['public_key'] = Mage::getStoreConfig('payment/everypay/public_key');
+        $fields['sandbox'] = Mage::getStoreConfig('payment/everypay/sandbox', $store);
+        $fields['public_key'] = Mage::getStoreConfig('payment/everypay/public_key', $store);
         $fields['order_id'] = $order->getLastRealOrderId();
         $fields['customer_email'] = $order->getData('customer_email');
         $fields['submit_url'] = Mage::getUrl('everypay/payment/review', array('_secure' => true));
