@@ -72,14 +72,14 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
      *
      * @return Everypay_Payment_Model_Everypay
      */
-    public function refund(Varient_Object $payment, $requestedAmount)
+    public function refund(Varien_Object $payment, $amount)
     {
         $transId = $payment->getLastTransId();
         $transId = str_replace('cpt_', null, $transId);
 
         try {
             $gateway = $this->getGateway($payment);
-            $response = $gateway->refund($transId, $this->getAmount($requestedAmount));
+            $response = $gateway->refund($transId, $this->getAmount($amount));
         } catch (Exception $e) {
             $this->throwException($e->getMessage());
         }
