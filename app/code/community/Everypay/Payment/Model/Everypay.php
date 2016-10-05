@@ -171,7 +171,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         $order = $payment->getOrder();
 
         $installments = new Everypay_Payment_Model_Installments();
-        $maxInstallments = $installments->getMaxInstallments($order->getGrandTotal());
+        $maxInstallments = $installments->getMaxInstallments($order->getBaseGrandTotal());
 
         return array(
             'token' => $this->getEverypayToken(),
