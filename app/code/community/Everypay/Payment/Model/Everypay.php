@@ -175,7 +175,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
 
         return array(
             'token' => $this->getEverypayToken(),
-            'amount' => $this->getAmount($order->getGrandTotal()),
+            'amount' => $this->getAmount($order->getBaseGrandTotal()),
             'description' => $this->getDescription($order),
             'payee_email' => $this->getPayeeEmail($order),
             'payee_phone' => $this->getPayeePhone($order),
