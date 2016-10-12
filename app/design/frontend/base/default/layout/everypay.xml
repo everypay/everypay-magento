@@ -10,7 +10,7 @@ and open the template in the editor.
                 <action method="addText">
                     <text>
                         <![CDATA[
-                            <script type="text/javascript" src="https://button.everypay.gr/js/button.js"></script>
+                        <script type="text/javascript" src="https://button.everypay.gr/js/v2/button.js"></script>
                         ]]>
                     </text>
                 </action>

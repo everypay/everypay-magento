@@ -17,12 +17,9 @@ var EverypayMage = (function() {
         },
         render: function() {
             opts.callback = 'everypayTokenCallback';
-            EverypayButton.jsonInit(opts, '#everypay-form')
+            EverypayButton.jsonInit(opts, 'everypay-form')
         },
         showModal: function() {
-            if ($$(buttonClass).length == 1) {
-                $$(buttonClass)[0].click();
-            }
         },
         renderAndShow: function() {
             this.render();
@@ -45,6 +42,14 @@ var EverypayMage = (function() {
             var checkoutOrderBtn = this.getCheckoutButton();
 
             checkoutOrderBtn.setAttribute("style", "display: none");
-        }
+        },
+        onreadyCallback: function (button) {
+            opts.onready = null;
+            button.click();
+        },
     }
 }());
+
+var onreadyCallback = function(button) {
+    EverypayMage.onreadyCallback(button);
+};
