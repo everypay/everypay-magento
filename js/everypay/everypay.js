@@ -44,7 +44,6 @@ var EverypayMage = (function() {
             checkoutOrderBtn.setAttribute("style", "display: none");
         },
         onreadyCallback: function (button) {
-            opts.onready = null;
             button.click();
         },
     }
