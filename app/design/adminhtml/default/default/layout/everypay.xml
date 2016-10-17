@@ -1,0 +1,10 @@
+<layout>
+  <adminhtml_system_config_edit>
+    <reference name="head">
+        <action method="addJs"><script>lib/jquery/jquery-1.10.2.min.js</script></action>
+        <action method="addJs"><script>lib/jquery/noconflict.js</script></action>
+        <action method="addJs"><script>everypay/mustache.min.js</script></action>
+        <action method="addJs"><script>everypay/installments.js</script></action>
+    </reference>
+  </adminhtml_system_config_edit>
+</layout>
