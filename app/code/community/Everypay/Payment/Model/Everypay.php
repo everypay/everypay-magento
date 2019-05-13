@@ -110,7 +110,7 @@ class Everypay_Payment_Model_Everypay extends Mage_Payment_Model_Method_Abstract
         return $this->auditResponse($payment, $response);
     }
 
-    private function captureOrPurchase(Varient_Object $payment)
+    private function captureOrPurchase($payment)
     {
         if ($transId = $payment->getLastTransId()) {
             // Capture authorized payment
